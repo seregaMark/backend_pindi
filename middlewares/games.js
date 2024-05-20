@@ -1,8 +1,17 @@
-const games = require('../models/category');
+const games = require("../models/game");
 
 const findAllGames = async (req, res, next) => {
-  req.gamesArray = await games.find({});
+  console.log("GET /games");
+  req.gamesArray = await games
+    .find({})
+    .populate("categories")
+    .populate({
+      path: "users",
+      select: "-password"
+    });
   next();
-}
+};
 
 module.exports = findAllGames;
+
+
