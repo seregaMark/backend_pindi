@@ -1,7 +1,18 @@
 const usersRouter = require('express').Router();
 
-const { sendAllUsers, sendUserCreated, sendUserById, sendUserUpdated, sendUserDeleted } = require('../controlles/users')
-const { findAllUsers, createUser, findUserById, updateUser, deleteUser, checkEmptyNameAndEmail, checkEmptyNameAndEmailAndPassword, checkIsUserExists, hashPassword } = require('../middlewares/users')
+const { sendAllUsers, sendUserCreated, sendUserById, sendUserUpdated, sendUserDeleted, sendMe } = require('../controlles/users')
+const {
+    findAllUsers,
+    createUser,
+    findUserById,
+    updateUser,
+    deleteUser,
+    checkEmptyNameAndEmail,
+    checkEmptyNameAndEmailAndPassword,
+    checkIsUserExists,
+    hashPassword,
+} = require('../middlewares/users')
+const { checkAuth } = require("../middlewares/auth.js");
 
 usersRouter.get(
     '/users',
@@ -13,6 +24,7 @@ usersRouter.post(
     findAllUsers,
     checkIsUserExists,
     checkEmptyNameAndEmailAndPassword,
+    checkAuth,
     hashPassword,
     createUser,
     sendUserCreated
@@ -20,6 +32,7 @@ usersRouter.post(
 usersRouter.put(
     "/users/:id",
     checkEmptyNameAndEmail,
+    checkAuth,
     updateUser,
     sendUserUpdated
 );
@@ -32,6 +45,11 @@ usersRouter.delete(
     "/users/:id",
     deleteUser,
     sendUserDeleted
+);
+usersRouter.get(
+    "/me",
+    checkAuth,
+    sendMe
 );
 
 module.exports = usersRouter;
