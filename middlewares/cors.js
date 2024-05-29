@@ -1,7 +1,7 @@
-const allowedCors = ['http://localhost:3000', 'http://localhost:3001', 'pindie-frontend-serega.nomorepartiesco.ru'];
+const allowedCors = ['http://localhost:3000', 'http://localhost:3001', 'https://pindie-frontend-serega.nomorepartiesco.ru' ];
 
 function cors(req, res, next) {
-    const { origin } = res.headers;
+    const { origin } = req.headers;
     console.log(origin)
 
     if (allowedCors.includes(origin)) {
