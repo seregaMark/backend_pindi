@@ -27,3 +27,5 @@ const checkCookiesJWT = (req, res, next) => {
 };
 
 module.exports = { checkAuth, checkCookiesJWT };
+
+
